@@ -820,7 +820,7 @@ function TargetArea()
     this.data.push(new ListValue("Through Wall", "wall", ['True', 'False'], 'False')
         .setTooltip('Whether or not to allow targets to be on the other side of a wall')
     );
-    this.data.push(new ListValue("Include Caster", "caster", [ 'Always', 'Only In Area', 'Never' ], 'False')
+    this.data.push(new ListValue("Include Caster", "caster", [ 'Always', 'Only In Area', 'Never' ], 'Only In Area')
         .setTooltip('If the caster should be included in the target list always / only when within the area / never')
     );
     this.data.push(new AttributeValue("Max Targets", "max", 99, 0)
@@ -850,8 +850,8 @@ function TargetCone()
     this.data.push(new ListValue("Through Wall", "wall", ['True', 'False'], 'False')
         .setTooltip('Whether or not to allow targets to be on the other side of a wall')
     );
-    this.data.push(new ListValue("Include Caster", "caster", [ 'True', 'False' ], 'False')
-        .setTooltip('Whether or not to include the caster in the target list')
+    this.data.push(new ListValue("Include Caster", "caster", [ 'Always', 'Only In Area', 'Never' ], 'Only In Area')
+        .setTooltip('If the caster should be included in the target list always / only when within the area / never')
     );
     this.data.push(new AttributeValue("Max Targets", "max", 99, 0)
         .setTooltip('The max amount of targets to apply children to')
@@ -877,8 +877,8 @@ function TargetLinear()
     this.data.push(new ListValue("Through Wall", "wall", ['True', 'False'], 'False')
         .setTooltip('Whether or not to allow targets to be on the other side of a wall')
     );
-    this.data.push(new ListValue("Include Caster", "caster", [ 'True', 'False' ], 'False')
-        .setTooltip('Whether or not to include the caster in the target list')
+    this.data.push(new ListValue("Include Caster", "caster", [ 'Always', 'Only In Area', 'Never' ], 'Only In Area')
+        .setTooltip('If the caster should be included in the target list always / only when within the area / never')
     );
     this.data.push(new AttributeValue("Max Targets", "max", 99, 0)
         .setTooltip('The max amount of targets to apply children to')
@@ -916,8 +916,8 @@ function TargetNearest()
     this.data.push(new ListValue("Through Wall", "wall", ['True', 'False'], 'False')
         .setTooltip('Whether or not to allow targets to be on the other side of a wall')
     );
-    this.data.push(new ListValue("Include Caster", "caster", [ 'True', 'False' ], 'False')
-        .setTooltip('Whether or not to include the caster in the target list')
+    this.data.push(new ListValue("Include Caster", "caster", [ 'Always', 'Only In Area', 'Never' ], 'Only In Area')
+        .setTooltip('If the caster should be included in the target list always / only when within the area / never')
     );
     this.data.push(new AttributeValue("Max Targets", "max", 1, 0)
         .setTooltip('The max amount of targets to apply children to')
