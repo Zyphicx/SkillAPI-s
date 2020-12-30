@@ -77,6 +77,7 @@ public abstract class TargetComponent extends EffectComponent {
             case "ONLY IN AREA":
                 self = TargetCaster.ONLY_IN_AREA;
                 break;
+            case "TRUE":
             case "ALWAYS":
                 self = TargetCaster.ALWAYS;
                 break;
