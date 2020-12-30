@@ -9,10 +9,12 @@ import com.sucy.skill.dynamic.DynamicSkill;
 import com.sucy.skill.dynamic.EffectComponent;
 import com.sucy.skill.dynamic.TempEntity;
 import com.sucy.skill.listener.MechanicListener;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -23,6 +25,12 @@ import java.util.function.Function;
  */
 public abstract class TargetComponent extends EffectComponent {
 
+    private enum TargetCaster {
+        NEVER,
+        ONLY_IN_AREA,
+        ALWAYS,
+    }
+
     private static final String ALLY   = "group";
     private static final String WALL   = "wall";
     private static final String CASTER = "caster";
@@ -31,7 +39,7 @@ public abstract class TargetComponent extends EffectComponent {
     boolean everyone;
     boolean allies;
     boolean throughWall;
-    boolean self;
+    TargetCaster self;
 
     @Override
     public ComponentType getType() {
@@ -61,7 +69,18 @@ public abstract class TargetComponent extends EffectComponent {
         everyone = group.equals("both");
         allies = group.equals("ally");
         throughWall = settings.getString(WALL, "false").equalsIgnoreCase("true");
-        self = settings.getString(CASTER, "false").equalsIgnoreCase("true");
+        switch(settings.getString(CASTER, "Only In Area").toUpperCase()) {
+            case "NEVER":
+                self = TargetCaster.NEVER;
+                break;
+            case "FALSE": // For backwards compatibility
+            case "ONLY IN AREA":
+                self = TargetCaster.ONLY_IN_AREA;
+                break;
+            case "ALWAYS":
+                self = TargetCaster.ALWAYS;
+                break;
+        }
     }
 
     abstract List<LivingEntity> getTargets(
@@ -132,12 +151,16 @@ public abstract class TargetComponent extends EffectComponent {
 
             for (LivingEntity entity : found) {
                 if (count >= max) break;
-                if (!isValidTarget(caster, target, entity)) continue;
-                list.add(found.get(count));
+                if(entity == caster) {
+                    if(self != TargetCaster.ONLY_IN_AREA) continue;
+                } else if (!isValidTarget(caster, target, entity))  {
+                    continue;
+                }
+                list.add(entity);
                 count++;
             }
         });
-        if (self) {
+        if (self == TargetCaster.ALWAYS) {
             list.add(caster);
         }
 
