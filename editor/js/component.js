@@ -2634,6 +2634,10 @@ function MechanicTrigger()
         .requireValue('trigger', damageTriggers)
         .setTooltip('The maximum damage that needs to be dealt')
     );
+    this.data.push(new ListValue('Include Overflow', 'overflow', [ 'True', 'False' ], 'True')
+        .requireValue('trigger', damageTriggers)
+        .setTooltip('Whether or not to include damage that overflows target\'s current HP')
+    );
 }
 
 extend('MechanicValueAdd', 'Component');
