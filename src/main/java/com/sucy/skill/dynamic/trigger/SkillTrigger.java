@@ -23,9 +23,11 @@ public abstract class SkillTrigger implements Trigger<SkillDamageEvent> {
     public boolean shouldTrigger(final SkillDamageEvent event, final int level, final Settings settings) {
         final double min = settings.getDouble("dmg-min");
         final double max = settings.getDouble("dmg-max");
+        final boolean overflow = settings.getBool("overflow");
         final List<String> types = settings.getStringList("category");
         final boolean empty = types.isEmpty() || types.get(0).isEmpty();
-        return event.getDamage() >= min && event.getDamage() <= max &&
+        final double damage = overflow ? event.getDamage() : Math.min(event.getDamage(), event.getTarget().getHealth());
+        return damage >= min && damage <= max &&
                 (empty || types.contains(event.getClassification()));
     }
 
