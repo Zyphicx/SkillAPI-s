@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+Note: Aside from English, I also speak Spanish, and can understand Portuguese and French, so you can post the issue in the language you prefer among those.
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
