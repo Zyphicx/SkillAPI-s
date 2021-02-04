@@ -737,6 +737,9 @@ function TriggerPhysicalDamage()
     this.data.push(new DoubleValue("Max Damage", "dmg-max", 999)
         .setTooltip('The maximum damage that needs to be dealt')
     );
+    this.data.push(new ListValue('Include Overflow', 'overflow', [ 'True', 'False' ], 'True')
+        .setTooltip('Whether or not to include damage that overflows target\'s current HP')
+    );
 }
 
 extend('TriggerSkillDamage', 'Component');
@@ -755,6 +758,9 @@ function TriggerSkillDamage()
     this.data.push(new DoubleValue("Max Damage", "dmg-max", 999)
         .setTooltip('The maximum damage that needs to be dealt')
     );
+    this.data.push(new ListValue('Include Overflow', 'overflow', [ 'True', 'False' ], 'True')
+        .setTooltip('Whether or not to include damage that overflows target\'s current HP')
+        );
     this.data.push(new StringListValue('Category', 'category', [ 'default' ] )
         .setTooltip('The type of skill damage to apply for. Leave this empty to apply to all skill damage.')
     );
@@ -779,6 +785,9 @@ function TriggerTookPhysicalDamage()
     this.data.push(new DoubleValue("Max Damage", "dmg-max", 999)
         .setTooltip('The maximum damage that needs to be dealt')
     );
+    this.data.push(new ListValue('Include Overflow', 'overflow', [ 'True', 'False' ], 'True')
+        .setTooltip('Whether or not to include damage that overflows target\'s current HP')
+    );
 }
 
 extend('TriggerTookSkillDamage', 'Component');
@@ -796,6 +805,9 @@ function TriggerTookSkillDamage()
     );
     this.data.push(new DoubleValue("Max Damage", "dmg-max", 999)
         .setTooltip('The maximum damage that needs to be dealt')
+    );
+    this.data.push(new ListValue('Include Overflow', 'overflow', [ 'True', 'False' ], 'True')
+        .setTooltip('Whether or not to include damage that overflows target\'s current HP')
     );
     this.data.push(new StringListValue('Category', 'category', [ 'default' ] )
         .setTooltip('The type of skill damage to apply for. Leave this empty to apply to all skill damage.')
@@ -2624,6 +2636,10 @@ function MechanicTrigger()
     this.data.push(new DoubleValue("Max Damage", "dmg-max", 999)
         .requireValue('trigger', damageTriggers)
         .setTooltip('The maximum damage that needs to be dealt')
+    );
+    this.data.push(new ListValue('Include Overflow', 'overflow', [ 'True', 'False' ], 'True')
+        .requireValue('trigger', damageTriggers)
+        .setTooltip('Whether or not to include damage that overflows target\'s current HP')
     );
 }
 

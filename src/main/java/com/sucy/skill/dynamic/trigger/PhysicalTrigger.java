@@ -22,8 +22,10 @@ public abstract class PhysicalTrigger implements Trigger<PhysicalDamageEvent> {
         final String type = settings.getString("type", "both");
         final double min = settings.getDouble("dmg-min");
         final double max = settings.getDouble("dmg-max");
+        final boolean overflow = settings.getBool("overflow", true);
         final boolean projectile = event.isProjectile();
-        return event.getDamage() >= min && event.getDamage() <= max &&
+        final double damage = overflow ? event.getDamage() : Math.min(event.getDamage(), event.getTarget().getHealth());
+        return damage >= min && damage <= max &&
                 (type.equalsIgnoreCase("both") || type.equalsIgnoreCase("projectile") == projectile);
     }
 
