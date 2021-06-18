@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 import java.util.Map;
 
-public class RaiseShieldTrigger implements Trigger<PlayerToggleHandRaiseEvent> {
+public class ShieldRaiseTrigger implements Trigger<PlayerToggleHandRaiseEvent> {
 
     /** {@inheritDoc} */
     @Override

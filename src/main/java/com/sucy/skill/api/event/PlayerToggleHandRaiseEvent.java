@@ -16,16 +16,33 @@ public class PlayerToggleHandRaiseEvent extends Event {
         this.raised = raised;
     }
 
+    /**
+     * @return the player who raised / lowered their hand
+     */
     public Player getPlayer() {
         return player;
     }
-
+    /**
+     * @return if the hand was raised (true) or lowered (false)
+     */
     public boolean isRaised() {
         return raised;
     }
 
+    /**
+     * @return gets the handlers for the event
+     */
     @Override
-    public @NotNull HandlerList getHandlers() {
-        return null;
+    public HandlerList getHandlers()
+    {
+        return handlers;
+    }
+
+    /**
+     * @return gets the handlers for the event
+     */
+    public static HandlerList getHandlerList()
+    {
+        return handlers;
     }
 }

@@ -747,7 +747,7 @@ function TriggerPhysicalDamage()
 extend('TriggerShieldRaise', 'Component');
 function TriggerShieldRaise()
 {
-    this.super('Shield raise', Type.TRIGGER, true);
+    this.super('Shield Raise', Type.TRIGGER, true);
 
     this.description = 'Applies skill effects when a player starts or stops blocking using a shield.';
 

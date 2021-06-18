@@ -50,10 +50,7 @@ import com.sucy.skill.hook.PluginChecker;
 import com.sucy.skill.listener.*;
 import com.sucy.skill.manager.*;
 import com.sucy.skill.packet.PacketInjector;
-import com.sucy.skill.task.CooldownTask;
-import com.sucy.skill.task.GUITask;
-import com.sucy.skill.task.ManaTask;
-import com.sucy.skill.task.SaveTask;
+import com.sucy.skill.task.*;
 import com.sucy.skill.thread.MainThread;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -185,6 +182,9 @@ public class SkillAPI extends JavaPlugin {
         }
         if (settings.isSkillBarCooldowns()) { MainThread.register(new CooldownTask()); }
         if (settings.isAutoSave()) { MainThread.register(new SaveTask(this)); }
+
+        MainThread.register(new ToggleHandRaiseTask());
+
         MainThread.register(new GUITask(this));
 
         GUITool.init();
