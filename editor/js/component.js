@@ -39,6 +39,7 @@ var Trigger = {
     MOVE                 : { name: 'Move',                 container: true, construct: TriggerMove               },
     PHYSICAL_DAMAGE      : { name: 'Physical Damage',      container: true, construct: TriggerPhysicalDamage     },
     SKILL_DAMAGE         : { name: 'Skill Damage',         container: true, construct: TriggerSkillDamage        },
+    SHIELD_RAISE         : { name: 'Shield Raise',         container: true, construct: TriggerShieldRaise        },
     TOOK_PHYSICAL_DAMAGE : { name: 'Took Physical Damage', container: true, construct: TriggerTookPhysicalDamage },
     TOOK_SKILL_DAMAGE    : { name: 'Took Skill Damage',    container: true, construct: TriggerTookSkillDamage    }
 };
@@ -62,42 +63,43 @@ var Target = {
  * Available condition component data
  */
 var Condition = {
-    ARMOR:       { name: 'Armor',       container: true, construct: ConditionArmor      },
-    ATTRIBUTE:   { name: 'Attribute',   container: true, construct: ConditionAttribute  },
-    BIOME:       { name: 'Biome',       container: true, construct: ConditionBiome      },
-    BLOCK:       { name: 'Block',       container: true, construct: ConditionBlock      },
-    CEILING:     { name: 'Ceiling',     container: true, construct: ConditionCeiling    },
-    CHANCE:      { name: 'Chance',      container: true, construct: ConditionChance     },
-    CLASS:       { name: 'Class',       container: true, construct: ConditionClass      },
-    CLASS_LEVEL: { name: 'Class Level', container: true, construct: ConditionClassLevel },
-    COMBAT:      { name: 'Combat',      container: true, construct: ConditionCombat     },
-    CROUCH:      { name: 'Crouch',      container: true, construct: ConditionCrouch     },
-    DIRECTION:   { name: 'Direction',   container: true, construct: ConditionDirection  },
-    ELEVATION:   { name: 'Elevation',   container: true, construct: ConditionElevation  },
-    ELSE:        { name: 'Else',        container: true, construct: ConditionElse       },
-    ENTITY_TYPE: { name: 'Entity Type', container: true, construct: ConditionEntityType },
-    FIRE:        { name: 'Fire',        container: true, construct: ConditionFire       },
-    FLAG:        { name: 'Flag',        container: true, construct: ConditionFlag       },
-    GROUND:      { name: 'Ground',      container: true, construct: ConditionGround     },
-    HEALTH:      { name: 'Health',      container: true, construct: ConditionHealth     },
-    INVENTORY:   { name: 'Inventory',   container: true, construct: ConditionInventory  },
-    ITEM:        { name: 'Item',        container: true, construct: ConditionItem       },
-    LIGHT:       { name: 'Light',       container: true, construct: ConditionLight      },
-    MANA:        { name: 'Mana',        container: true, construct: ConditionMana       },
-    MOUNTED:     { name: 'Mounted',     container: true, construct: ConditionMounted    },
-    MOUNTING:    { name: 'Mounting',    container: true, construct: ConditionMounting   },
-    NAME:        { name: 'Name',        container: true, construct: ConditionName       },
-    OFFHAND:     { name: 'Offhand',     container: true, construct: ConditionOffhand    },
-    PERMISSION:  { name: 'Permission',  container: true, construct: ConditionPermission },
-    POTION:      { name: 'Potion',      container: true, construct: ConditionPotion     },
-    SKILL_LEVEL: { name: 'Skill Level', container: true, construct: ConditionSkillLevel },
-    SLOT:        { name: 'Slot',        container: true, construct: ConditionSlot       },
-    STATUS:      { name: 'Status',      container: true, construct: ConditionStatus     },
-    TIME:        { name: 'Time',        container: true, construct: ConditionTime       },
-    TOOL:        { name: 'Tool',        container: true, construct: ConditionTool       },
-    VALUE:       { name: 'Value',       container: true, construct: ConditionValue      },
-    WATER:       { name: 'Water',       container: true, construct: ConditionWater      },
-    WEATHER:     { name: 'Weather',     container: true, construct: ConditionWeather    }
+    ARMOR:        { name: 'Armor',        container: true, construct: ConditionArmor       },
+    ATTRIBUTE:    { name: 'Attribute',    container: true, construct: ConditionAttribute   },
+    BIOME:        { name: 'Biome',        container: true, construct: ConditionBiome       },
+    BLOCK:        { name: 'Block',        container: true, construct: ConditionBlock       },
+    CEILING:      { name: 'Ceiling',      container: true, construct: ConditionCeiling     },
+    CHANCE:       { name: 'Chance',       container: true, construct: ConditionChance      },
+    CLASS:        { name: 'Class',        container: true, construct: ConditionClass       },
+    CLASS_LEVEL:  { name: 'Class Level',  container: true, construct: ConditionClassLevel  },
+    COMBAT:       { name: 'Combat',       container: true, construct: ConditionCombat      },
+    CROUCH:       { name: 'Crouch',       container: true, construct: ConditionCrouch      },
+    DIRECTION:    { name: 'Direction',    container: true, construct: ConditionDirection   },
+    ELEVATION:    { name: 'Elevation',    container: true, construct: ConditionElevation   },
+    ELSE:         { name: 'Else',         container: true, construct: ConditionElse        },
+    ENTITY_TYPE:  { name: 'Entity Type',  container: true, construct: ConditionEntityType  },
+    FIRE:         { name: 'Fire',         container: true, construct: ConditionFire        },
+    FLAG:         { name: 'Flag',         container: true, construct: ConditionFlag        },
+    GROUND:       { name: 'Ground',       container: true, construct: ConditionGround      },
+    HEALTH:       { name: 'Health',       container: true, construct: ConditionHealth      },
+    INVENTORY:    { name: 'Inventory',    container: true, construct: ConditionInventory   },
+    ITEM:         { name: 'Item',         container: true, construct: ConditionItem        },
+    LIGHT:        { name: 'Light',        container: true, construct: ConditionLight       },
+    MANA:         { name: 'Mana',         container: true, construct: ConditionMana        },
+    MOUNTED:      { name: 'Mounted',      container: true, construct: ConditionMounted     },
+    MOUNTING:     { name: 'Mounting',     container: true, construct: ConditionMounting    },
+    NAME:         { name: 'Name',         container: true, construct: ConditionName        },
+    OFFHAND:      { name: 'Offhand',      container: true, construct: ConditionOffhand     },
+    PERMISSION:   { name: 'Permission',   container: true, construct: ConditionPermission  },
+    POTION:       { name: 'Potion',       container: true, construct: ConditionPotion      },
+    SKILL_LEVEL:  { name: 'Skill Level',  container: true, construct: ConditionSkillLevel  },
+    SHIELD_RAISE: { name: 'Shield Raise', container: true, construct: ConditionShieldRaise },
+    SLOT:         { name: 'Slot',         container: true, construct: ConditionSlot        },
+    STATUS:       { name: 'Status',       container: true, construct: ConditionStatus      },
+    TIME:         { name: 'Time',         container: true, construct: ConditionTime        },
+    TOOL:         { name: 'Tool',         container: true, construct: ConditionTool        },
+    VALUE:        { name: 'Value',        container: true, construct: ConditionValue       },
+    WATER:        { name: 'Water',        container: true, construct: ConditionWater       },
+    WEATHER:      { name: 'Weather',      container: true, construct: ConditionWeather     }
 };
 
 /**
@@ -739,6 +741,18 @@ function TriggerPhysicalDamage()
     );
     this.data.push(new ListValue('Include Overflow', 'overflow', [ 'True', 'False' ], 'True')
         .setTooltip('Whether or not to include damage that overflows target\'s current HP')
+    );
+}
+
+extend('TriggerShieldRaise', 'Component');
+function TriggerShieldRaise()
+{
+    this.super('Shield raise', Type.TRIGGER, true);
+
+    this.description = 'Applies skill effects when a player starts or stops blocking using a shield.';
+
+    this.data.push(new ListValue('Type', 'type', [ 'Start Blocking', 'Stop Blocking', 'Both' ], 'Start Blocking')
+        .setTooltip('Whether or not you want to apply components when blocking or not blocking')
     );
 }
 
@@ -1391,6 +1405,18 @@ function ConditionPotion()
     );
     this.data.push(new AttributeValue('Max Rank', 'max-rank', 999, 0)
         .setTooltip('The maximum rank the potion effect can be')
+    );
+}
+
+extend('ConditionShieldRaise', 'Component');
+function ConditionShieldRaise()
+{
+    this.super('Shield Raise', Type.CONDITION, true);
+
+    this.description = 'Applies child components if the target player(s) are blocking with a shield';
+
+    this.data.push(new ListValue('Blocking', 'shield-raise', [ 'True', 'False' ], 'True')
+        .setTooltip('Whether or not the player should be blocking')
     );
 }
 
@@ -2574,7 +2600,7 @@ function MechanicTrigger()
 
     this.description = 'Listens for a trigger on the current targets for a duration.';
 
-    this.data.push(new ListValue('Trigger', 'trigger', [ 'Crouch', 'Death', 'Environment Damage', 'Kill', 'Land', 'Launch', 'Physical Damage', 'Skill Damage', 'Took Physical Damage', 'Took Skill Damage' ], 'Death')
+    this.data.push(new ListValue('Trigger', 'trigger', [ 'Crouch', 'Death', 'Environment Damage', 'Kill', 'Land', 'Launch', 'Physical Damage', 'Shield Raise', 'Skill Damage', 'Took Physical Damage', 'Took Skill Damage' ], 'Death')
         .setTooltip('The trigger to listen for')
     );
     this.data.push(new AttributeValue('Duration', 'duration', 5, 0)
@@ -2621,6 +2647,12 @@ function MechanicTrigger()
     this.data.push(new StringValue('Category', 'category', '')
         .requireValue('trigger', [ 'Skill Damage', 'Took Skill Damage' ])
         .setTooltip('The type of skill damage to apply for. Leave this empty to apply to all skill damage.')
+    );
+
+    // SHIELD RAISE
+    this.data.push(new ListValue('Type', 'type', [ 'Start Blocking', 'Stop Blocking', 'Both' ], 'Start Blocking')
+        .requireValue('trigger', [ 'Shield Raise' ])
+        .setTooltip('Whether or not you want to apply components when blocking or not blocking')
     );
 
     // DAMAGE

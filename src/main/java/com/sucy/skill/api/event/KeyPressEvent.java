@@ -19,9 +19,7 @@ public class KeyPressEvent extends Event {
         this.key = key;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
+    public Player getPlayer() { return player; }
 
     public Key getKey() {
         return key;
